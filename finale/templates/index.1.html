@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Cheap Eats, Cheap Drinks
+{% endblock %}
+
+{% block main %}
+    <form action="{{ url_for('indexsearch') }}" method="post, get">
+        <fieldset>
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control" name="zipnasty" placeholder="Zip Code or Neighborhood" type="text"/> 
+            </div>
+        </fieldset>
+    </form>
+     <form action="{{ url_for('indexsearch') }}" method="post, get">
+        <fieldset>
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control" name="keyword" placeholder="Beer, Wings, Pizza..." type="text"/> 
+            </div>
+        </fieldset>
+    </form>
+    <table class= "table table-striped">
+        <tr>
+            <th> </th>
+            <th>Bar</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Time</th>
+            <th>Deal</th>
+        </tr>
+        <tfoot>
+            <tr>
+                <td colspan="5"></td>
+                <td> </td>
+            </tr>
+        </tfoot>
+            
+        {% for bar in steals %}    
+            <tr>
+                <td class="count">.</td>
+                <td>{{ bar['bar_name'] }}</td>
+                <td>{{ bar['address'] }}, {{ bar['city'] }}, {{ bar['state'] }} {{ bar['zip'] }}</td>
+                <td>{{ bar['phone'] }}</td>
+                <td>{{ bar['time_start'] }} - {{ bar['time_end'] }}</td>
+                <td>{{ bar['deal'] }}</td>
+            </tr>
+        {% endfor %}
+        
+        <tr class="__web-inspector-hide-shortcut__">
+            <td colspan="5"></td>
+            <td></td>
+        </tr>
+    </table>
+        
+    
+    
+    
+{% endblock %}

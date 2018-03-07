@@ -1,0 +1,4 @@
+0. The dimensions of the board can be anywhere from 3x3, to 9x9. d = d, therefore it can only have equal height and width dimensions.
+1. integer
+2. greet or printf
+3. init, draw, move, won

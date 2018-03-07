@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Balance Sheet
+{% endblock %}
+
+{% block main %}
+    <table class= "table table-striped">
+        <tr>
+            <th>Symbol</th>
+            <th>Shares</th>
+            <th>Price</th>
+            <th>Transaction</th>
+        </tr>
+            
+        {% for transacted in stocks %}    
+            <tr>
+                <td>{{ transacted['symbol'] }}</td>
+                <td>{{ transacted['shares'] }}</td>
+                <td>${{ transacted['price'] }}</td>
+                <td>{{ transacted['transacted'] }}</td>
+            </tr>
+        {% endfor %}
+        
+        
+    </table>
+        
+    
+    
+    
+{% endblock %}

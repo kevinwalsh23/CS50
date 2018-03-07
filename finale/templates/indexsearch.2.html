@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta -->
+        <meta charset="utf-8"/>
+        <meta content="initial-scale=1, width=device-width" name="viewport"/>
+
+        <!-- documentation at http://getbootstrap.com/, alternative themes at https://www.bootstrapcdn.com/bootswatch/ -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+        <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet"/>
+        
+        <!-- https://developers.google.com/maps/documentation/javascript/ -->
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ key | urlencode }}&v=3.exp"></script>
+        
+        <!-- https://github.com/corejavascript/typeahead.js/blob/master/doc/jquery_typeahead.md -->
+        <script src="https://cdn.rawgit.com/corejavascript/typeahead.js/master/dist/typeahead.jquery.js"></script>
+        
+        <!-- http://stewartjpark.com/Flask-JSGlue/ -->
+        {{ JSGlue.include() }}
+        
+        <!-- http://handlebarsjs.com/ -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+        
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <!-- app's own JavaScript -->
+        <script src="{{ url_for('static', filename='scripts123.js') }}"></script>
+
+        <title> {% block title %}DealHawk{% endblock %}</title>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <div class="topbar">
+                        <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbar" data-toggle="collapse" type="button">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{ url_for('index') }}"><span class="green">DeelHawk</span><span class="red"></span></a>
+                        </div>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar">
+                        {% if session.user_id %}
+                            <ul class="nav navbar-nav">
+                                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                            </ul>
+                        {% else %}
+                            <ul class="nav navbar-nav">
+                                <li><a href="{{ url_for('login') }}">About</a></a></li>
+                                <li><a href="{{ url_for('login') }}">Log In</a></li>
+                                <li><a href="{{ url_for('register') }}">Register</a></li>
+                                
+                                
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+
+            {% if get_flashed_messages() %}
+                <header>
+                    <div class="alert alert-info" role="alert">
+                        {{ get_flashed_messages() | join(" ") }}
+                    </div>
+                </header>
+            {% endif %}
+
+            <main>
+                    <form action="{{ url_for('indexsearch') }}" method="get, post">
+        <fieldset>
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control" name="zipnasty" placeholder="Zip Code or Neighborhood" type="text"/>
+            </div>
+
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control" name="keyword" placeholder="Beer, Wings, Pizza..." type="text"/> 
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">Please select</span>
+                        <select name="comp_select" class="selectpicker form-control">
+                <p>
+                <label>From:</label>
+                <select id ="startList">
+                    <option value = "1">11:00AM</option>
+                    <option value = "2">11:30AM</option>
+                    <option value = "3">12:00PM</option>
+                    <option value = "4">12:30PM</option>
+                    <option value = "5">1:00PM</option>
+                    <option value = "6">1:30PM</option>
+                    <option value = "7">2:00PM</option>
+                    <option value = "8">2:30PM</option>
+                    <option value = "9">3:00PM</option>
+                    <option value = "10">3:30PM</option>
+                    <option value = "11">4:00PM</option>
+                    <option value = "12">4:30PM</option>
+                    <option value = "13">5:00PM</option>
+                    <option value = "14">5:30PM</option>
+                    <option value = "15">6:00PM</option>
+                    <option value = "16">6:30PM</option>
+                    <option value = "17">7:00PM</option>
+                    <option value = "18">7:30PM</option>
+                    <option value = "19">8:00PM</option>
+                    <option value = "20">8:30PM</option>
+                    <option value = "21">9:00PM</option>
+                    <option value = "22">9:30PM</option>
+                    <option value = "23">10:00PM</option>
+                    <option value = "24">10:30PM</option>
+                    <option value = "25">11:00PM</option>
+                    <option value = "26">11:30PM</option>
+                    <option value = "27">11:59PM</option>
+                </select>
+                </p>
+            </div>
+            <div class="form-group">
+                <p>
+                <label>Until:</label>
+                <select id = "endList">
+                <option value = "1">11:59PM</option>
+                <option value = "2">11:00AM</option>
+                <option value = "3">11:30AM</option>
+                <option value = "4">12:00PM</option>
+                <option value = "5">12:30PM</option>
+                <option value = "6">1:00PM</option>
+                <option value = "7">1:30PM</option>
+                <option value = "8">2:00PM</option>
+                <option value = "9">2:30PM</option>
+                <option value = "10">3:00PM</option>
+                <option value = "11">3:30PM</option>
+                <option value = "12">4:00PM</option>
+                <option value = "13">4:30PM</option>
+                <option value = "14">5:00PM</option>
+                <option value = "15">5:30PM</option>
+                <option value = "16">6:00PM</option>
+                <option value = "17">6:30PM</option>
+                <option value = "18">7:00PM</option>
+                <option value = "19">7:30PM</option>
+                <option value = "20">8:00PM</option>
+                <option value = "21">8:30PM</option>
+                <option value = "22">9:00PM</option>
+                <option value = "23">9:30PM</option>
+                <option value = "24">10:00PM</option>
+                <option value = "25">10:30PM</option>
+                <option value = "26">11:00PM</option>
+                <option value = "27">11:30PM</option>
+                </select>
+                </p>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" type="submit">Search</button>
+            </div>
+        </fieldset>        
+    </form>
+
+    <table class= "table table-striped">
+        <tr>
+            <th></th>
+            <th>Bar</th>
+            <th>Address</th>
+            <th>Phone </th>
+            <th>Time</th>
+            <th>Deal</th>
+        </tr>
+        <tfoot>
+            <tr>
+                <td colspan="5"></td>
+                <td> </td>
+            </tr>
+        </tfoot>
+            
+        {% for bar in zipresults %}    
+            <tr>
+                <td class="count">.</td>
+                <td>{{ bar['bar_name'] }}</td>
+                <td>{{ bar['address'] }}, {{ bar['city'] }}, {{ bar['state'] }} {{ bar['zip'] }}</td>
+                <td>{{ bar['phone'] }}</td>
+                <td>{{ bar['time_start'] }} - {{ bar['time_end'] }}</td>
+                <td>{{ bar['deal'] }}</td>
+            </tr>
+        {% endfor %}
+        
+        <tr class="__web-inspector-hide-shortcut__">
+            <td colspan="5"></td>
+            <td></td>
+        </tr>
+    </table>
+            </main>
+            
+        </div>
+        
+        <div class="googlemaps">
+        
+            <!-- https://developers.google.com/maps/documentation/javascript/tutorial -->
+            
+            <div id="map-canvas"></div>
+        
+        </div>
+        
+        <div class="clearfix"></div>
+        
+    </body>
+
+</html>

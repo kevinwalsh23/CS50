@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <cs50.h>
+
+
+float Change;
+int main(void)
+
+
+
+{
+    float Q = Change / .25;
+    float D = Change % .25
+    float dime = D / .10
+    float N = dime % .10
+    float Nickel = float N / .05
+    float P = N % .05
+    float Penny = P / .01
+    
+    total = Q + dime + nickel + penny;
+    
+}
+{
+    printf("f% \n", total);
+}
+}

@@ -1,0 +1,19 @@
+#define _XOPEN_SOURCE 500
+
+#include <cs50.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int board[DIM_MAX][DIM_MAX];
+// constants
+#define DIM_MIN 3
+#define DIM_MAX 9
+
+int main(int argc, string argv[])
+{
+
+int init [d] [d]
+{
+    // TODO
+}

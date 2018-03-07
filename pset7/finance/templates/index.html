@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Balance Sheet
+{% endblock %}
+
+{% block main %}
+    <table class= "table table-striped">
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Shares</th>
+            <th>Price</th>
+            <th>TOTAL</th>
+        </tr>
+        <tfoot>
+            <tr>
+                <td colspan="4"></td>
+                <td> ${{ freshy }}</td>
+            </tr>
+        </tfoot>
+            
+        {% for name in stocks %}    
+            <tr>
+                <td>{{ name['symbol'] }}</td>
+                <td>{{ name['name'] }}</td>
+                <td>{{ name['shares'] }}</td>
+                <td>${{ name['Price'] }}</td>
+                <td>${{ name['total'] }}</td>
+                <td></td>
+            </tr>
+        {% endfor %}
+        
+        <tr class="__web-inspector-hide-shortcut__">
+            <td colspan="4">CASH</td>
+            <td>${{ cashmoney }}</td>
+        </tr>
+    </table>
+        
+    
+    
+    
+{% endblock %}

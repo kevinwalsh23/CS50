@@ -1,0 +1,7 @@
+0.  It is the longest word in the dictionary, describing a lung disease from inhaling fine ash.
+1.  getrusage - get information about resource utilization
+2.  16 - 2 structs and 16 long types.
+3.  Passing in variables takes time and memory, both which are not exact counts which can lead to inaccuracies. The goal is to measure RAM and time, so reseting to zero saves memory and leads to more accuracy.
+4.  TODO
+5.  TODO
+6.  TODO
